@@ -15,5 +15,15 @@ test ('Verify Admin Page', async ({page}) => {
   await adminPage.verifyAdminPagedVisible();
   await adminPage.verifyAdminPageHeader();
   await adminPage.verifyAdminHeaderFields();
+  await adminPage.verifyUserManagementDropdown();
+  await adminPage.verifyJobDropdown();
+  await adminPage.verifyOrganizationDropdown();
+  await adminPage.verifyQualificationsDropdown();
+  await adminPage.verifyConfigurationsDropdown();
+  await adminPage.verifySystemUsersTable();
+  await adminPage.verifyValidUserSearch('Admin', 'Admin', 'Enabled');
+  await adminPage.verifyResetButton();
+ 
+ 
 
 })
