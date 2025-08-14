@@ -1,29 +1,26 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pages/LoginPage');
-const { LeftMenuPage } = require('../pages/LeftMenu');
-const { AdminPage } = require('../pages/AdminPage');
+const { test, expect } = require("@playwright/test");
+const { LoginPage } = require("../pages/LoginPage");
+const { LeftMenuPage } = require("../pages/LeftMenu");
+const { AdminPage } = require("../pages/AdminPage");
+const { AdminPageFlows } = require("../steps/adminSteps.js");
 
-
-test ('Verify Admin Page', async ({page}) => {
-   const loginPage = new LoginPage(page);
-   const leftMenuPage = new LeftMenuPage(page);
-   const adminPage = new AdminPage(page);
+test("Verify Admin Page", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  const leftMenuPage = new LeftMenuPage(page);
+  const adminPage = new AdminPage(page);
+  const adminStepsFlow = new AdminPageFlows(page);
 
   await loginPage.goto();
-  await loginPage.login('admin', 'admin123');
+  await loginPage.login("admin", "admin123");
   await leftMenuPage.clickAdminTab();
   await adminPage.verifyAdminPagedVisible();
   await adminPage.verifyAdminPageHeader();
   await adminPage.verifyAdminHeaderFields();
-  await adminPage.verifyUserManagementDropdown();
-  await adminPage.verifyJobDropdown();
-  await adminPage.verifyOrganizationDropdown();
-  await adminPage.verifyQualificationsDropdown();
-  await adminPage.verifyConfigurationsDropdown();
-  await adminPage.verifySystemUsersTable();
-  await adminPage.verifyValidUserSearch('Admin', 'Admin', 'Enabled');
-  await adminPage.verifyResetButton();
- 
- 
-
-})
+  await adminStepsFlow.verifyUserManagementDropdown();
+  await adminStepsFlow.verifyJobDropdown();
+  await adminStepsFlow.verifyOrganizationDropdwon();
+  await adminStepsFlow.verifyQualificationDropdown();
+  await adminStepsFlow.verifyConfigurationDropdown();
+  await adminStepsFlow.verifyValidUserSearch("Admin", "Admin", "Enabled");
+  await adminStepsFlow.verifyResetButton();
+});
