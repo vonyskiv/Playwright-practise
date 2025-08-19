@@ -1,6 +1,7 @@
 const { expect } = require("@playwright/test");
 const { appContent } = require("../../src/data/appContent.js");
 const { AdminPage } = require("../pages/AdminPage.js");
+const { log } = require("node:console");
 
 class AdminPageFlows {
   /**
@@ -41,7 +42,7 @@ class AdminPageFlows {
       appContent.JobOptions
     );
   }
-  async verifyOrganizationDropdwon() {
+  async verifyOrganizationDropdown() {
     await this.verifyDropdownOptions(
       this.adminPage.organizationDropdown,
       this.adminPage.organizationDropdownOptions,
@@ -79,11 +80,12 @@ class AdminPageFlows {
     await this.adminPage.searchButton.click();
     await this.page.waitForTimeout(500);
 
-    await expect(this.adminPage.resultsTableRows.first()).toContainText(
+    const firstRow = await this.adminPage.resultsTableRows.first();
+    await expect(firstRow.locator("[role=cell]")).toContainText([
       name,
       role,
-      status
-    );
+      status,
+    ]);
 
     const rowCounts = await this.adminPage.resultsTableRows.count();
     const expectedTitle = `(${rowCounts}) Record Found`;

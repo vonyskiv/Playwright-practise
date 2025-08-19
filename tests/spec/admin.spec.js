@@ -18,7 +18,7 @@ test("Verify Admin Page", async ({ page }) => {
   await adminPage.verifyAdminHeaderFields();
   await adminStepsFlow.verifyUserManagementDropdown();
   await adminStepsFlow.verifyJobDropdown();
-  await adminStepsFlow.verifyOrganizationDropdwon();
+  await adminStepsFlow.verifyOrganizationDropdown();
   await adminStepsFlow.verifyQualificationDropdown();
   await adminStepsFlow.verifyConfigurationDropdown();
   await adminStepsFlow.verifyValidUserSearch("Admin", "Admin", "Enabled");
