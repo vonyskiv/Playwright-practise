@@ -1,6 +1,5 @@
 const { expect } = require("@playwright/test");
 const { appContent } = require("../../src/data/appContent.js");
-const { log } = require("console");
 const { stat } = require("fs/promises");
 
 class AdminPage {

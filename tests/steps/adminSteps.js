@@ -1,7 +1,6 @@
 const { expect } = require("@playwright/test");
 const { appContent } = require("../../src/data/appContent.js");
 const { AdminPage } = require("../pages/AdminPage.js");
-const { log } = require("node:console");
 
 class AdminPageFlows {
   /**
