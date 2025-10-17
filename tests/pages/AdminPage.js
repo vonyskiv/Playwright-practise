@@ -64,6 +64,23 @@ class AdminPage {
     this.recordFoundStripe = page.locator(".orangehrm-horizontal-padding");
     this.resultsTableRows = page.locator('.oxd-table-card [role="row"]');
     this.resultsTableCell = page.locator('[role="cell"]');
+    this.addUserButton = page.locator(".orangehrm-header-container button");
+    this.addUserContainer = page.locator(".orangehrm-card-container");
+    this.addUserRole = page.locator(
+      '(//div[contains(@class, "oxd-select-wrapper")])[1]'
+    );
+    this.addUserStatus = page.locator(
+      '(//div[contains(@class, "oxd-select-wrapper")])[2]'
+    );
+    this.addEmployeeName = page.locator(".oxd-autocomplete-wrapper input");
+
+    this.addUsername = page.locator(
+      '//div[contains(@class, "oxd-input-group")]//label[text()="Username"]/following::input[1]'
+    );
+    this.addPassword = page.locator('input[type="password"]');
+    this.cancelAddingUser = page.getByRole("button", { name: "Cancel" });
+    this.saveNewUser = page.locator('button[type="submit"]');
+    this.dropdownLocator = page.locator(".oxd-select-dropdown");
   }
 
   async verifyAdminPagedVisible() {

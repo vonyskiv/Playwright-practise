@@ -108,5 +108,60 @@ class AdminPageFlows {
     expect(this.adminPage.userRoleDropdown).toContainText("Select");
     expect(this.adminPage.statusDropdown).toContainText("Select");
   }
+
+  async openAddUserForm() {
+    await this.adminPage.addUserButton.click();
+    await expect(this.page).toHaveURL(/.*\/saveSystemUser/);
+    await expect(this.adminPage.addUserContainer).toBeVisible();
+  }
+
+  async selectNewUserRole(role) {
+    await this.adminPage.addUserRole.click();
+    await this.adminPage.dropdownLocator.waitFor({ state: "visible" });
+    await this.adminPage.dropdownLocator.getByText(role).click();
+  }
+
+  async selectNewUserStatus(status) {
+    await this.adminPage.addUserStatus.click();
+    await this.adminPage.dropdownLocator.waitFor({ state: "visible" });
+    await this.adminPage.dropdownLocator.getByText(status).click();
+  }
+
+  async selectEmployeeName() {
+    await this.adminPage.addEmployeeName.fill("test");
+
+    const listbox = this.page.locator(".oxd-autocomplete-dropdown");
+    await listbox.waitFor({ state: "visible" });
+
+    const option = listbox
+      .locator("div", { hasText: "TestEmployee Middle Last" })
+      .first();
+    await option.waitFor({ state: "visible" });
+    await option.click();
+
+    await expect(this.adminPage.addEmployeeName).not.toHaveValue("test");
+  }
+
+  async fillNewUserName(name) {
+    await this.adminPage.addUsername.fill(name);
+  }
+
+  async createUserPassword(password) {
+    await this.adminPage.addPassword.nth(0).fill(password);
+    await this.adminPage.addPassword.nth(1).fill(password);
+
+    await this.adminPage.saveNewUser.click();
+    await expect(this.page).toHaveURL(/.*\/viewSystemUsers/);
+  }
+
+  async addingNewUser(role, status, name, password) {
+    await this.openAddUserForm();
+    await this.selectNewUserRole(role);
+    await this.selectNewUserStatus(status);
+    await this.selectEmployeeName();
+    await this.fillNewUserName(name);
+    await this.createUserPassword(password);
+    await this.verifyValidUserSearch(name, role, status);
+  }
 }
 module.exports = { AdminPageFlows };
