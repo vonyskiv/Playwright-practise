@@ -133,9 +133,7 @@ class AdminPageFlows {
     const listbox = this.page.locator(".oxd-autocomplete-dropdown");
     await listbox.waitFor({ state: "visible" });
 
-    const option = listbox
-      .locator("div", { hasText: "TestEmployee Middle Last" })
-      .first();
+    const option = listbox.locator("div", { hasText: "Orange Test" }).first();
     await option.waitFor({ state: "visible" });
     await option.click();
 

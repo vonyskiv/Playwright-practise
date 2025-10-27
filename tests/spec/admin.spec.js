@@ -27,7 +27,7 @@ test("Verify Admin Page Functionality", async ({ page }) => {
   await adminStepsFlow.addingNewUser(
     "Admin",
     "Disabled",
-    "New users",
-    "Playwright2025"
+    "New USER!",
+    "Playwrights2025"
   );
 });

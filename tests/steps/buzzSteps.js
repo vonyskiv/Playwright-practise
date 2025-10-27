@@ -25,14 +25,10 @@ class BuzzPageFlows {
     const likeCount = this.page
       .locator("p.oxd-text", { hasText: "Like" })
       .first();
-
     const initialText = await likeCount.textContent();
     const initialCount = parseInt(initialText, 10);
     await this.buzzPage.postHeartIcon.first().click();
-    await this.page.waitForTimeout(500);
-    const updatedText = await likeCount.textContent();
-
-    await expect(updatedText).toEqual(`${initialCount + 1} Like`);
+    await expect(likeCount).toContainText(`${initialCount + 1} Like`);
   }
 
   async verifyEditingPost(editedText) {

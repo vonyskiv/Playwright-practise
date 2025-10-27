@@ -1,13 +1,11 @@
 const { expect } = require("@playwright/test");
 const { appContent } = require("../../src/data/appContent.js");
 const { stat } = require("fs/promises");
+const { BasePage } = require("./BasePage.js");
 
-class AdminPage {
-  /**
-   * @param {import('@playwright/test').Page} page
-   */
+class AdminPage extends BasePage {
   constructor(page) {
-    this.page = page;
+    super(page);
     this.headerMenu = page.locator(
       '.oxd-topbar-body [role="navigation"] ul li'
     );

@@ -1,11 +1,10 @@
-class DashboardPage {
-  /**
-   * @param {import('@playwright/test').Page} page
-   */
+const { BasePage } = require("./BasePage.js");
+
+class DashboardPage extends BasePage {
   constructor(page) {
-    this.page = page;
-    this.profileIcon = page.getByAltText('profile picture').first();
-    this.logoutButton = page.getByText('Logout');
+    super(page);
+    this.profileIcon = page.getByAltText("profile picture").first();
+    this.logoutButton = page.getByText("Logout");
   }
 
   async logout() {
@@ -15,7 +14,6 @@ class DashboardPage {
 
   async verifyDashboardVisible() {
     await this.page.waitForURL(/dashboard/);
-   
   }
 }
 

@@ -1,13 +1,10 @@
 const { expect } = require("@playwright/test");
 const { appContent } = require("../../src/data/appContent.js");
+const { BasePage } = require("./BasePage.js");
 
-class LeftMenuPage {
-  /**
-   * @param {import('@playwright/test').Page} page
-   */
-
+class LeftMenuPage extends BasePage {
   constructor(page) {
-    this.page = page;
+    super(page);
     this.AdminTab = page.locator(
       `//div[@class="oxd-sidepanel-body"]//span[text()= "${appContent.leftMenuAdmin}"]`
     );
@@ -48,17 +45,17 @@ class LeftMenuPage {
 
   async clickAdminTab() {
     await this.AdminTab.click();
-    await this.page.waitForTimeout(2000);
+    expect(this.page).toHaveURL(/admin/);
   }
 
   async clickBuzzTab() {
     await this.BuzzTab.click();
-    await this.page.waitForTimeout(2000);
+    expect(this.page).toHaveURL(/buzz/);
   }
 
   async clickRecruitmentTab() {
     await this.RecruitmentTab.click();
-    await this.page.waitForTimeout(2000);
+    expect(this.page).toHaveURL(/recruitment/);
   }
 }
 

@@ -1,12 +1,10 @@
 const { expect } = require("@playwright/test");
 const { appContent } = require("../../src/data/appContent.js");
+const { BasePage } = require("./BasePage.js");
 
-class BuzzPage {
-  /**
-   * @param {import('@playwright/test').Page} page
-   */
+class BuzzPage extends BasePage {
   constructor(page) {
-    this.page = page;
+    super(page);
     this.buzzNewsFeedTitle = page.locator(".orangehrm-buzz-newsfeed>p");
     this.buzzNewsInput = page.locator(".oxd-buzz-post-input");
     this.postButton = page.locator("button[type='submit']");

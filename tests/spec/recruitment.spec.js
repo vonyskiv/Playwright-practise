@@ -10,6 +10,6 @@ test("Verify Recruitment Page Functionality", async ({ page }) => {
 
   await loginPage.goto();
   await loginPage.login("admin", "admin123");
-  await leftMenuPage.recruitmentPage();
+  await leftMenuPage.clickRecruitmentTab();
   await recruitmentPage.verifyRecruitmentPagedVisible();
 });
