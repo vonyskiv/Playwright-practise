@@ -1,20 +1,19 @@
-const { expect } = require('@playwright/test');
+const { expect } = require("@playwright/test");
+const { BasePage } = require("./BasePage.js");
 
-class LoginPage {
-  /**
-   * @param {import('@playwright/test').Page} page
-   */
-
+class LoginPage extends BasePage {
   constructor(page) {
-    this.page = page;
+    super(page);
     this.usernameInput = page.locator('[name="username"]');
     this.passwordInput = page.locator('[name="password"]');
     this.loginButton = page.locator('[type="submit"]');
-    this.errorMessage = page.getByRole('alert');
+    this.errorMessage = page.getByRole("alert");
   }
 
   async goto() {
-    await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+    await this.page.goto(
+      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+    );
   }
 
   async login(username, password) {
@@ -23,9 +22,9 @@ class LoginPage {
     await this.loginButton.click();
   }
 
-async verifyErrorMessage() {
-  await expect(this.errorMessage).toHaveText("Invalid credentials");
-}
+  async verifyErrorMessage() {
+    await expect(this.errorMessage).toHaveText("Invalid credentials");
+  }
 }
 
 module.exports = { LoginPage };

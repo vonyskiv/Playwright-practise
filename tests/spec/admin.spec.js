@@ -3,8 +3,9 @@ const { LoginPage } = require("../pages/LoginPage");
 const { LeftMenuPage } = require("../pages/LeftMenu");
 const { AdminPage } = require("../pages/AdminPage");
 const { AdminPageFlows } = require("../steps/adminSteps.js");
+const { appContent } = require("../../src/data/appContent.js");
 
-test("Verify Admin Page", async ({ page }) => {
+test("Verify Admin Page Functionality", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const leftMenuPage = new LeftMenuPage(page);
   const adminPage = new AdminPage(page);
@@ -23,4 +24,10 @@ test("Verify Admin Page", async ({ page }) => {
   await adminStepsFlow.verifyConfigurationDropdown();
   await adminStepsFlow.verifyValidUserSearch("Admin", "Admin", "Enabled");
   await adminStepsFlow.verifyResetButton();
+  await adminStepsFlow.addingNewUser(
+    "Admin",
+    "Disabled",
+    "New USER!",
+    "Playwrights2025"
+  );
 });
